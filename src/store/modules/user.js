@@ -1,6 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+import { hexMD5 } from '@/utils/md5'
 
 const getDefaultState = () => {
   return {
@@ -32,10 +33,11 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
+      login(username, hexMD5(password)).then(response => {
         const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        const tokenStr = data.tokenHead + data.token
+        commit('SET_TOKEN', tokenStr)
+        setToken(tokenStr)
         resolve()
       }).catch(error => {
         reject(error)

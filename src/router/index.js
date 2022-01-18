@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import detailLayout from '@/layout/detailLayout'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -32,6 +33,17 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -44,121 +56,166 @@ export const constantRoutes = [
   },
 
   {
+    path: '/createform',
+    component: () => import('@/views/CreateForm/index'),
+    hidden: true
+  },
+
+  {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/mineinfo',
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      path: 'mineinfo',
+      name: 'MineInfo',
+      component: () => import('@/views/MineInfo/index'),
+      meta: { title: '我的消息', icon: 'selfCenter', affix: true }
     }]
   },
 
   {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
+    path: '/overview',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        name: 'Overview',
+        component: () => import('@/views/OverviewList/index'),
+        meta: { title: '物料概览', icon: 'payable-manage' }
       }
     ]
   },
 
   {
-    path: '/nested',
+    path: '/upload',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'index',
+        name: 'UploadExcel',
+        component: () => import('@/views/OverviewList/uploadExcel'),
+        meta: { title: '导入预览' },
+        hidden: true
+      }
+    ]
+  },
+
+  {
+    path: '/puchase',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Puchase',
+        component: () => import('@/views/PuchaseList/index'),
+        meta: { title: '采购列表', icon: 'order-manage' }
+      }
+    ]
+  },
+
+  {
+    path: '/plansend',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'PlanSend',
+        component: () => import('@/views/PlanSend/index'),
+        meta: { title: '发货计划列表', icon: 'exception-handle' }
+      }
+    ]
+  },
+
+  {
+    path: '/delivery',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Delivery',
+        component: () => import('@/views/DeliveryList/index'),
+        meta: { title: '交货列表', icon: 'product-manage' }
+      }
+    ]
+  },
+
+  {
+    path: '/return',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Return',
+        component: () => import('@/views/ReturnList/index'),
+        meta: { title: '退货列表', icon: 'return-manage' }
+      }
+    ]
+  },
+
+  {
+    path: '/payable',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Payable',
+        component: () => import('@/views/PayableList/index'),
+        meta: { title: '应收列表', icon: 'payable-manage' }
+      }
+    ]
+  },
+
+  {
+    path: '/pdetail',
+    component: detailLayout,
+    redirect: '/pdetail/puchaseDetail',
+    hidden: true,
+    children: [
+      {
+        path: 'puchaseDetail',
+        name: 'PuchaseDetail',
+        component: () => import('@/views/PuchaseList/puchase-detail'),
+        meta: { title: '采购详情' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'plansendDetail',
+        name: 'PlansendDetail',
+        component: () => import('@/views/PlanSend/plansend-detail'),
+        meta: { title: '计划详情' }
+      },
+      {
+        path: 'deliveryDetail',
+        name: 'DeliveryDetail',
+        component: () => import('@/views/DeliveryList/delivery-detail'),
+        meta: { title: '交货详情' }
+      },
+      {
+        path: 'returnDetail',
+        name: 'ReturnDetail',
+        component: () => import('@/views/ReturnList/return-detail'),
+        meta: { title: '退货详情' }
+      },
+      {
+        path: 'payableDetail',
+        name: 'PayableDetail',
+        component: () => import('@/views/PayableList/payable-detail'),
+        meta: { title: '应收详情' }
       }
     ]
   },
 
-  {
-    path: 'external-link',
+  /* {
+    path: '/price',
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'index',
+        name: 'Price',
+        component: () => import('@/views/PriceList/index'),
+        meta: { title: '价格列表', icon: 'form' }
       }
     ]
-  },
+  }, */
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

@@ -1,0 +1,139 @@
+.primary-color {
+  color: #4c8ceb;
+}
+
+.normal-color {
+  color: #e02020;
+}
+
+.pos-relative {
+  position: relative;
+}
+
+.pos-absolute {
+  position: absolute;
+}
+
+.over-hidden {
+  overflow: hidden;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.cursor {
+  cursor: pointer;
+}
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.float-left {
+  float: left;
+}
+.bottom-16 {
+  margin-bottom: 16px;
+}
+.bottom-12 {
+  margin-bottom: 12px;
+}
+.bottom-6 {
+  margin-bottom: 6px;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.line-28 {
+  line-height: 28px !important;
+}
+.float-right {
+  float: right;
+}
+.srm-orange {
+  color: #fa6400;
+}
+.srm-red {
+  color: #e02020;
+}
+.detail-contain {
+  background: #f4f5f6;
+}
+.expand-detail {
+  font-size: 13px;
+  font-weight: 400;
+  color: #4c8ceb;
+  line-height: 32px;
+  margin-left: 6px;
+}
+.filter-btn {
+  display: inline-block;
+  width: 76px;
+  height: 32px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 32px;
+  background: #008cff;
+  margin-left: -2px;
+}
+
+.tableHeaderStyle {
+  height: 52px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(245, 245, 245, 0.4) !important;
+}
+.tableRowStyle {
+  height: 54px;
+  font-size: 13px;
+  color: #000000;
+  background: #f9fcff;
+  cursor: pointer;
+  padding: 0 !important;
+}
+.tableHeaderStyle1 {
+  height: 40px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+  background: #fff;
+  padding: 0 !important;
+}
+.tableRowStyle1 {
+  height: 40px;
+  font-size: 13px;
+  color: #131413;
+  background: #fff;
+  padding: 0 !important;
+}
+.tableHeaderStyle2 {
+  height: 32px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #fbfbfb !important;
+  padding: 0 !important;
+}
+.tableRowStyle2 {
+  height: 32px;
+  font-size: 13px;
+  color: #000000;
+  background: rgba(245, 245, 245, 0.4);
+  padding: 0 !important;
+}
+.padding0 {
+  padding: 0;
+}

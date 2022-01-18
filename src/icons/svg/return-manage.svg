@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <g id="色调改后" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的消息" transform="translate(-24.000000, -317.000000)" fill="#FFFFFF">
+            <g id="Dashboard/Active备份" transform="translate(0.000000, 296.000000)">
+                <g id="退货列表" transform="translate(24.000000, 21.000000)">
+                    <rect id="矩形" opacity="0" x="0" y="0" width="14" height="14"></rect>
+                    <g transform="translate(0.583333, 0.000000)" fill-rule="nonzero">
+                        <g>
+                            <path d="M5.93478261,0 L11.865174,3.28695652 L11.865174,9.86086957 L5.93478261,13.1478261 L0.00439125522,9.86086957 L0.00439125522,3.28695652 L5.93478261,0 Z M5.93478261,1.2523913 L1.09991304,3.93217391 L1.09991304,9.21534783 L5.93478261,11.8951304 L10.7693478,9.21534783 L10.7693478,3.93217391 L5.93478261,1.2523913 Z" id="多边形"></path>
+                            <path d="M6.01791502,3.5 L8.53583003,6.01791502 L7.76108695,6.7926581 L6.567,5.598 L6.56782625,9.441828 L5.47217408,9.441828 L5.472,5.595 L4.27474308,6.7926581 L3.5,6.01791502 L6.01791502,3.5 Z" id="形状结合" transform="translate(6.017915, 6.470914) rotate(90.000000) translate(-6.017915, -6.470914) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

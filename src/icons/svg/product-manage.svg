@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>商品管理</title>
+    <desc>Created with Sketch.</desc>
+    <g id="订单管理-客户订单-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="客户订单" transform="translate(-24.000000, -454.000000)">
+            <g id="编组-45备份-2">
+                <g id="Dashboard/Active-3备份-24" transform="translate(0.000000, 433.000000)">
+                    <g id="Dashboard/Active-2">
+                        <g id="Dashboard/Active">
+                            <g id="Group-34">
+                                <g id="商品管理" transform="translate(24.000000, 21.000000)">
+                                    <g id="4.产品中心">
+                                        <rect id="矩形" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="14" height="14"></rect>
+                                        <path d="M7,0 L13.062,3.5 L13.062,10.5 L7,14 L0.938,10.5 L0.938,3.5 L7,0 Z M7,1.155 L1.937,4.07700001 L1.937,9.92200001 L7,12.844 L12.062,9.92200001 L12.062,4.07700001 L7,1.155 Z" id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                        <path d="M7,0 L13.062,3.5 L7,7 L0.938,3.5 L7,0 Z M7,1.155 L2.938,3.5 L7,5.845 L11.061,3.5 L7,1.155 Z" id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                        <polygon id="路径" fill="#FFFFFF" fill-rule="nonzero" points="7.50000001 6.49999999 7.50000001 13 6.49999999 13 6.49999999 6.49999999"></polygon>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

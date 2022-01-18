@@ -15,15 +15,22 @@
   },
   "dependencies": {
     "axios": "0.18.1",
+    "better-scroll": "^2.4.2",
     "core-js": "3.6.5",
+    "driver.js": "^0.9.8",
     "element-ui": "2.13.2",
+    "file-saver": "^2.0.5",
     "js-cookie": "2.2.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
     "vue": "2.6.10",
+    "vue-concise-slider": "^4.2.3",
+    "vue-drag-resize": "^1.5.4",
     "vue-router": "3.0.6",
-    "vuex": "3.1.0"
+    "vuedraggable": "^2.24.3",
+    "vuex": "3.1.0",
+    "xlsx": "^0.17.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.4",
@@ -45,6 +52,7 @@
     "sass": "1.26.8",
     "sass-loader": "8.0.2",
     "script-ext-html-webpack-plugin": "2.1.3",
+    "script-loader": "^0.7.2",
     "serve-static": "1.13.2",
     "svg-sprite-loader": "4.1.3",
     "svgo": "1.2.2",
