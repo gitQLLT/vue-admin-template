@@ -89,7 +89,7 @@
         </el-container>
       </el-main>
       <el-footer>
-        power by liangtao
+        <a href="http://www.baidu.com">power by liangtao</a>
       </el-footer>
     </el-container>
   </div>
@@ -107,6 +107,7 @@ export default {
   },
   data() {
     return {
+      test: 'woshisb',
       myArray: [
         { id: 1, name: '单行文本' },
         { id: 2, name: '多行文本' },

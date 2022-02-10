@@ -90,6 +90,7 @@
         <el-table
           v-if="planType === '1'"
           ref="tableList"
+          :key="0"
           v-loading="listLoading"
           :data="planDetail.details"
           style="width: 100%"
@@ -159,6 +160,7 @@
         <el-table
           v-if="planType === '0'"
           ref="tableList"
+          :key="1"
           v-loading="listLoading"
           :data="planDetail.details"
           style="width: 100%"
@@ -284,18 +286,15 @@ export default {
           console.log(error)
         })
       } else {
-        Promise.all([
-          planDetail({ id: this.orderId }).then(res => {
-            if (res.data && res.data.details) {
-              const { purchaseOrgId, purchaserId, remarks, supplierId,
-                purchaseOrgName, address, consignee, receiverTel } = res.data
-              const { receiveOrgId, settleOrgId } = res.data.details[0]
-              this.planDetail = { purchaseOrgId, receiveOrgId, settleOrgId, purchaserId,
-                remarks, supplierId, purchaseOrgName, address, consignee, receiverTel }
-            }
-          }).catch(error => {
-            console.log(error)
-          }),
+        planDetail({ id: this.orderId }).then(res => {
+          if (res.data && res.data.details) {
+            const { purchaseOrgId, purchaserId, remarks, supplierId,
+              purchaseOrgName, address, consignee, receiverTel } = res.data
+            const { receiveOrgId, settleOrgId } = res.data.details[0]
+            this.planDetail = { purchaseOrgId, receiveOrgId, settleOrgId, purchaserId,
+              remarks, supplierId, purchaseOrgName, address, consignee, receiverTel }
+          }
+        }).then(() => {
           listDetail({ ids: this.planIds }).then(res => {
             if (res.data) {
               let sum = 0
@@ -310,13 +309,12 @@ export default {
               this.planDetail.details = res.data
               this.priceSum = sum
             }
-          }).catch(error => {
-            console.log(error)
+            setTimeout(() => {
+              this.listLoading = false
+            }, 300)
           })
-        ]).then(() => {
-          setTimeout(() => {
-            this.listLoading = false
-          }, 300)
+        }).catch(error => {
+          console.log(error)
         })
       }
     },

@@ -1,0 +1,27 @@
+<template>
+  <div>
+    <slot /></div>
+</template>
+
+<script>
+export default {
+  name: 'Test1',
+  inheritAttrs: false,
+  data() {
+    return {
+
+    }
+  },
+
+  mounted() {
+
+  },
+
+  methods: {
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+</style>

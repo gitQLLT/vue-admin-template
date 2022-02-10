@@ -27,7 +27,7 @@
         </el-row>
         <el-row>
           <el-col :span="4" class="mid-text">供应商：<span class="small-text">{{ payableDetail.supplierName }}</span></el-col>
-          <el-col :span="20" class="mid-text">类型：<span class="small-text">{{ payableDetail.val6 }}</span></el-col>
+          <el-col :span="20" class="mid-text">类型：<span class="small-text">{{ payableDetail.type }}</span></el-col>
         </el-row>
       </div>
       <div class="invoice-table">

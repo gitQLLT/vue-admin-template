@@ -23,6 +23,15 @@ export function purchaseAccept(data) {
   })
 }
 
+// 供应商部分接单，只传有变更的明细行id和变更后的数量
+export function acceptPortion(data) {
+  return request({
+    url: '/purchaseOrder/acceptPortion',
+    method: 'post',
+    data
+  })
+}
+
 // 供应商拒单
 export function purchaseRefuse(data) {
   return request({

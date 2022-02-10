@@ -80,16 +80,11 @@
             </template>
           </el-table-column>
           <el-table-column label="序号" type="index" width="60" align="center" />
-          <el-table-column label="发货日期" width="120">
-            <template slot-scope="{row}">
-              {{ row.date ? row.date.substring(0,10) : '' }}
-            </template>
-          </el-table-column>
-          <el-table-column label="状态">
-            <template slot-scope="scope">
-              <p>{{ scope.row.status | status }}</p>
-            </template>
-          </el-table-column>
+          <el-table-column label="联系方式" width="140" prop="receiverTel" />
+          <el-table-column label="交货单号" width="160" prop="number" />
+          <el-table-column label="送货物流" width="120" prop="logisticsName" />
+          <el-table-column label="物流单号" width="160" prop="trackingNumber" />
+          <el-table-column label="送货地址" prop="address" />
           <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <p>

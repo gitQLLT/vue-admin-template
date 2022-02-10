@@ -142,8 +142,8 @@ function coreMD5(x) {
  * Convert an array of little-endian words to a hex string.
  */
 function binl2hex(binarray) {
-  var hex_tab = "0123456789abcdef"
-  var str = ""
+  var hex_tab = '0123456789abcdef'
+  var str = ''
   for (var i = 0; i < binarray.length * 4; i++) {
     str += hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
       hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF)
@@ -154,15 +154,15 @@ function binl2hex(binarray) {
 /*
  * Convert an array of little-endian words to a base64 encoded string.
  */
-function binl2b64(binarray) {
-  var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-  var str = ""
+/* function binl2b64(binarray) {
+  var tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  var str = ''
   for (var i = 0; i < binarray.length * 32; i += 6) {
     str += tab.charAt(((binarray[i >> 5] << (i % 32)) & 0x3F) |
       ((binarray[i >> 5 + 1] >> (32 - i % 32)) & 0x3F))
   }
   return str
-}
+} */
 
 /*
  * Convert an 8-bit character string to a sequence of 16-word blocks, stored
@@ -172,9 +172,8 @@ function binl2b64(binarray) {
 function str2binl(str) {
   var nblk = ((str.length + 8) >> 6) + 1 // number of 16-word blocks
   var blks = new Array(nblk * 16)
-  for (var i = 0; i < nblk * 16; i++) blks[i] = 0
-  for (var i = 0; i < str.length; i++)
-    blks[i >> 2] |= (str.charCodeAt(i) & 0xFF) << ((i % 4) * 8)
+  for (let i = 0; i < nblk * 16; i++) blks[i] = 0
+  for (var i = 0; i < str.length; i++) { blks[i >> 2] |= (str.charCodeAt(i) & 0xFF) << ((i % 4) * 8) }
   blks[i >> 2] |= 0x80 << ((i % 4) * 8)
   blks[nblk * 16 - 2] = str.length * 8
   return blks
@@ -184,16 +183,15 @@ function str2binl(str) {
  * Convert a wide-character string to a sequence of 16-word blocks, stored as
  * an array, and append appropriate padding for MD4/5 calculation.
  */
-function strw2binl(str) {
+/* function strw2binl(str) {
   var nblk = ((str.length + 4) >> 5) + 1 // number of 16-word blocks
   var blks = new Array(nblk * 16)
-  for (var i = 0; i < nblk * 16; i++) blks[i] = 0
-  for (var i = 0; i < str.length; i++)
-    blks[i >> 1] |= str.charCodeAt(i) << ((i % 2) * 16)
+  for (let i = 0; i < nblk * 16; i++) blks[i] = 0
+  for (var i = 0; i < str.length; i++) { blks[i >> 1] |= str.charCodeAt(i) << ((i % 2) * 16) }
   blks[i >> 1] |= 0x80 << ((i % 2) * 16)
   blks[nblk * 16 - 2] = str.length * 16
   return blks
-}
+} */
 
 /*
  * External interface

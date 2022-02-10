@@ -543,7 +543,7 @@ export default {
 
     /* status不满足无法勾选 */
     selectInit(row, index) {
-      if (row.status === 0) {
+      if (row.status === 2) {
         return true
       } else {
         this.tableData[index].details.forEach(item => {

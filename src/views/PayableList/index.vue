@@ -97,7 +97,7 @@
           <el-table-column label="总金额" width="120" prop="allAmount" />
           <el-table-column label="税额" width="120" prop="taxAmount" />
           <el-table-column label="已确认金额" width="120" prop="taxAmount" />
-          <el-table-column label="类型" width="120" prop="val8" />
+          <el-table-column label="类型" width="120" prop="type" />
           <el-table-column label="状态" width="100" prop="status">
             <template slot-scope="scope">
               <p>{{ scope.row.status | status }}</p>
@@ -189,6 +189,7 @@ export default {
         case 0: return '待确认'
         case 1: return '已确认'
         case 2: return '部分确认'
+        case 3: return '已完成'
       }
     }
   },
@@ -234,6 +235,10 @@ export default {
         {
           label: '部分确认',
           value: '2'
+        },
+        {
+          label: '已完成',
+          value: '3'
         }
       ],
       selectListId: [],

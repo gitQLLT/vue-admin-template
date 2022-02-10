@@ -20,9 +20,15 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
+// 根组件挂载点两种写法，el>$mount
 new Vue({
   el: '#app',
   router,
   store,
   render: h => h(App)
 })
+/* new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app') */

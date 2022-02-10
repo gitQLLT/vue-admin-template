@@ -105,8 +105,9 @@
       <div class="detail-table">
         <!-- 已发、待发货 -->
         <el-table
-          v-if="status!==0 && status!==3"
+          v-if="status!==1 && status!==3"
           ref="tableList"
+          :key="0"
           v-loading="listLoading"
           :data="puchaseDetail.details"
           style="width: 100%"
@@ -119,7 +120,11 @@
           <el-table-column prop="texture" label="材质" width="80" />
           <el-table-column prop="packs" label="包装量" width="80" />
           <el-table-column prop="unitName" label="单位" width="80" />
-          <el-table-column prop="price" label="单价" width="80" />
+          <el-table-column prop="price" label="单价" width="80">
+            <template slot-scope="scope">
+              <p>{{ scope.row.price!==0?scope.row.price:'-' }}</p>
+            </template>
+          </el-table-column>
           <el-table-column prop="totalPrice" label="金额" width="120" />
           <el-table-column prop="boxes" label="件数" width="80" />
           <el-table-column prop="orderDate" label="交货时间" width="120" />
@@ -129,10 +134,10 @@
           <el-table-column prop="receiveQuantity" label="收货数量" width="80" />
           <el-table-column prop="checkQuantity" label="合格数量" width="80" />
           <el-table-column prop="instockQuantity" label="入库数量" />
-          <el-table-column label="操作" width="100">
+          <el-table-column v-if="status===4 || status===9" label="操作" width="100">
             <template slot-scope="scope">
               <!-- 已发或者已完成显示交货详情 -->
-              <p v-if="status===4 || status===9">
+              <p>
                 <el-link
                   :underline="false"
                   @click.stop="viewProcureDetail(scope.$index, scope.row)"
@@ -145,8 +150,9 @@
 
         <!-- 新订单 -->
         <el-table
-          v-if="status===0"
+          v-if="status===1"
           ref="tableList"
+          :key="1"
           v-loading="listLoading"
           :data="puchaseDetail.details"
           style="width: 100%"
@@ -160,14 +166,25 @@
           <el-table-column prop="texture" label="材质" width="80" />
           <el-table-column prop="boxes" label="件数" width="80" />
           <el-table-column prop="unitName" label="单位" width="80" />
-          <el-table-column prop="price" label="单价" width="80" />
-          <el-table-column prop="purchaseQuantity" label="采购数量" />
+          <el-table-column prop="price" label="单价" width="80">
+            <template slot-scope="scope">
+              <p>{{ scope.row.price!==0?scope.row.price:'-' }}</p>
+            </template>
+          </el-table-column>
+          <el-table-column label="采购数量">
+            <template slot-scope="scope">
+              <template>
+                <el-input-number v-model="scope.row.purchaseQuantity" :controls="false" :min="0" :max="scope.row.purchaseQuantity" class="edit-input" size="small" />
+              </template>
+            </template>
+          </el-table-column>
         </el-table>
 
         <!-- 部分发货 -->
         <el-table
           v-if="status===3"
           ref="tableList"
+          :key="2"
           v-loading="listLoading"
           :data="puchaseDetail.details"
           style="width: 100%"
@@ -187,7 +204,11 @@
           <el-table-column prop="texture" label="材质" width="80" />
           <el-table-column prop="boxes" label="件数" width="80" />
           <el-table-column prop="unitName" label="单位" width="80" />
-          <el-table-column prop="price" label="单价" width="80" />
+          <el-table-column prop="price" label="单价" width="80">
+            <template slot-scope="scope">
+              <p>{{ scope.row.price!==0?scope.row.price:'-' }}</p>
+            </template>
+          </el-table-column>
           <el-table-column label="包装量" width="100">
             <template slot-scope="scope">
               <template v-if="scope.row.edit">
@@ -267,7 +288,7 @@
 </template>
 
 <script>
-import { purchaseDetail, purchaseAccept, purchaseRefuse, puchaseListDetail } from '@/api/procurement/puchase'
+import { purchaseDetail, acceptPortion, purchaseRefuse, puchaseListDetail } from '@/api/procurement/puchase'
 import { simpleDetail, deliverySave } from '@/api/procurement/delivery'
 export default {
   name: 'PuchaseDetail', /* 采购详情，需要与路由name一致 */
@@ -327,7 +348,8 @@ export default {
       ],
       gridData: [],
       detailIds: [], // 详情列表id数组,
-      dialogTableVisible: false
+      dialogTableVisible: false,
+      originDetails: [] // 用于部分接单时判断数量变更
     }
   },
 
@@ -350,8 +372,11 @@ export default {
         purchaseDetail({ id: this.puchaseId }).then(res => {
           if (res.data) {
             this.puchaseDetail = res.data
-            // 获取详情列表id数组
-            this.getComputeData(res.data.details)
+            if (this.puchaseDetail.details) {
+              this.originDetails = JSON.parse(JSON.stringify(this.puchaseDetail.details))
+              // 获取详情列表id数组
+              this.getComputeData(res.data.details)
+            }
           }
           // Just to simulate the time of the request
           setTimeout(() => {
@@ -362,19 +387,16 @@ export default {
         })
       } else {
         // 部分发货详情，可以进行保存发货
-        Promise.all([
-          purchaseDetail({ id: this.orderId }).then(res => {
-            if (res.data && res.data.details) {
-              const { purchaseOrgId, purchaserId, remarks, supplierId, status,
-                taxAmount, excludeTaxAmount, allAmount } = res.data
-              const { receiveOrgId, settleOrgId } = res.data.details[0]
-              this.puchaseDetail = { purchaseOrgId, receiveOrgId,
-                settleOrgId, purchaserId, remarks, supplierId, status,
-                taxAmount, excludeTaxAmount, allAmount }
-            }
-          }).catch(error => {
-            console.log(error)
-          }),
+        purchaseDetail({ id: this.orderId }).then(res => {
+          if (res.data && res.data.details) {
+            const { purchaseOrgId, purchaserId, remarks, supplierId, status,
+              taxAmount, excludeTaxAmount, allAmount } = res.data
+            const { receiveOrgId, settleOrgId } = res.data.details[0]
+            this.puchaseDetail = { purchaseOrgId, receiveOrgId,
+              settleOrgId, purchaserId, remarks, supplierId, status,
+              taxAmount, excludeTaxAmount, allAmount }
+          }
+        }).then(() => {
           puchaseListDetail({ ids: this.puchaseIds }).then(async res => {
             if (res.data) {
               let sum = 0
@@ -389,13 +411,12 @@ export default {
               this.puchaseDetail.details = res.data
               this.priceSum = sum
             }
-          }).catch(error => {
-            console.log(error)
+            setTimeout(() => {
+              this.listLoading = false
+            }, 300)
           })
-        ]).then(() => {
-          setTimeout(() => {
-            this.listLoading = false
-          }, 300)
+        }).catch(error => {
+          console.log(error)
         })
       }
     },
@@ -414,7 +435,13 @@ export default {
 
     /* 新订单接受 */
     acceptOrder() {
-      purchaseAccept({ ids: this.puchaseId.toString().split() }).then(res => {
+      const details = []
+      for (let i = 0, len = this.puchaseDetail.details.length; i < len; i++) {
+        if (this.puchaseDetail.details[i].purchaseQuantity !== this.originDetails[i].purchaseQuantity) {
+          details.push({ id: this.puchaseDetail.details[i].id, quantity: this.puchaseDetail.details[i].purchaseQuantity })
+        }
+      }
+      acceptPortion({ details }).then(res => {
         this.$message({
           message: res.message,
           type: 'success'

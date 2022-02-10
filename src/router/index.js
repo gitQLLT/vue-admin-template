@@ -62,6 +62,12 @@ export const constantRoutes = [
   },
 
   {
+    path: '/test',
+    component: () => import('@/views/CreateForm/test'),
+    hidden: true
+  },
+
+  {
     path: '/',
     component: Layout,
     redirect: '/mineinfo',
@@ -135,6 +141,19 @@ export const constantRoutes = [
         name: 'Delivery',
         component: () => import('@/views/DeliveryList/index'),
         meta: { title: '交货列表', icon: 'product-manage' }
+      }
+    ]
+  },
+
+  {
+    path: '/sendery',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Sendery',
+        component: () => import('@/views/SenderyList/index'),
+        meta: { title: '发货列表', icon: 'product-manage' }
       }
     ]
   },
